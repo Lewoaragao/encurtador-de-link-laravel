@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class LinkController extends Controller
 {
     public function index()
     {
-        $links = Link::latest()->get();
-        return view('index', compact('links'));
+        return view('index');
     }
 
     public function store(Request $request)
@@ -34,5 +32,11 @@ class LinkController extends Controller
     {
         $link = Link::where('slug', $slug)->firstOrFail();
         return redirect($link->url);
+    }
+
+    public function linksUser()
+    {
+        $links = Link::latest()->get();
+        return view('linksUser', compact('links'));
     }
 }
