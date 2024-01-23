@@ -21,9 +21,10 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            $links = Link::latest()->get();
+            $user = auth()->user();
+            $links = Link::where('user_id', $user->id)->get();
 
             return view('linksUser', compact('links'));
         }
@@ -41,7 +42,7 @@ class AuthController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:3|confirmed',
         ]);
 
         $user = User::create([

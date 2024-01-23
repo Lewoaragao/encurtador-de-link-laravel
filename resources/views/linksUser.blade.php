@@ -6,17 +6,22 @@
         </p>
     @endif
 
-    <form action="/encurtar" method="post">
+    <form class="mb-3" action="/encurtar" method="post">
         @csrf
-        <label for="url">URL:</label>
-        <input type="text" name="url" required>
-        <button class="btn btn-primary" type="submit">Encurtar</button>
+        <div class="input-group">
+            <input class="form-control" type="text" name="url" placeholder="URL" required>
+            <button class="btn btn-primary" type="submit">Encurtar</button>
+        </div>
     </form>
 
     <h2>Links Encurtados:</h2>
     <ul>
-        @foreach ($links as $link)
-            <li><a href="{{ url($link->slug) }}">{{ url($link->slug) }}</a></li>
-        @endforeach
+        @if (isset($links) && count($links) > 0)
+            @foreach ($links as $link)
+                <li><a href="{{ url($link->slug) }}">{{ url($link->slug) }}</a></li>
+            @endforeach
+        @else
+            <li>Nenhum link disponível.</li>
+        @endif
     </ul>
 @endsection

@@ -23,9 +23,10 @@ class LinkController extends Controller
         $link = Link::create([
             'url' => $request->input('url'),
             'slug' => $slug,
+            'user_id' => auth()->user()->id,
         ]);
 
-        return redirect('/')->with('link', $link);
+        return redirect('/links/user')->with('link', $link);
     }
 
     public function redirect($slug)
@@ -36,7 +37,8 @@ class LinkController extends Controller
 
     public function linksUser()
     {
-        $links = Link::latest()->get();
+        $user = auth()->user();
+        $links = Link::where('user_id', $user->id)->get();
         return view('linksUser', compact('links'));
     }
 }
