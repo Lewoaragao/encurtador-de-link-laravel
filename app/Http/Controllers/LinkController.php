@@ -32,7 +32,8 @@ class LinkController extends Controller
     public function redirect($slug)
     {
         $link = Link::where('slug', $slug)->firstOrFail();
-        return redirect($link->url);
+        return view('redirect', ['url' => $link->url]);
+
     }
 
     public function linksUser()
