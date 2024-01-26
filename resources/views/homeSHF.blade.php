@@ -11,10 +11,8 @@
 </head>
 
 <body>
-    <div class="container my-3">
-        @include('templates.header')
+    <div class="container my-3 vh-100">
         @yield('content')
-        @include('templates.footer')
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
