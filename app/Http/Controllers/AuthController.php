@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -26,7 +26,7 @@ class AuthController extends Controller
             $user = auth()->user();
             $links = Link::where('user_id', $user->id)->get();
 
-            return view('linksUser', compact('links'));
+            return view('link.user', compact('links'));
         }
 
         return back()->withErrors(['email' => 'As credenciais fornecidas não correspondem aos nossos registros.']);
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     public function register(Request $request)

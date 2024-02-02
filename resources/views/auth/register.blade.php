@@ -17,26 +17,28 @@
         @csrf
 
         <div class="mb-3">
-            <label class="form-label" for="name">Name:</label>
+            <label class="form-label" for="name">{{ __('messages.name') }}</label>
             <input class="form-control" type="text" name="name" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="email">Email:</label>
+            <label class="form-label" for="email">{{ __('messages.email') }}</label>
             <input class="form-control" type="email" name="email" required aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+            <div id="emailHelp" class="form-text">{{ __('messages.we.will.never.share.your.email') }}</div>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="password">Password:</label>
+            <label class="form-label" for="password">{{ __('messages.password') }}:</label>
             <input class="form-control" type="password" name="password" required>
         </div>
 
         <div class="mb-3">
-            <label class="form-label" for="password_confirmation">Confirm Password:</label>
+            <label class="form-label" for="password_confirmation">{{ __('messages.confirm.password') }}</label>
             <input class="form-control" type="password" name="password_confirmation" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">{{ __('messages.register') }}</button>
     </form>
+
+    <a href={{ route('auth.login') }} class="btn btn-secondary">{{ __('messages.login') }}</a>
 @endsection

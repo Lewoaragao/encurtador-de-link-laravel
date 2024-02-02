@@ -3,8 +3,8 @@
 @section('content')
     <div class="d-flex justify-content-center align-items-center h-100">
         <div>
-            <h1 class="fw-bold">Error 404 - Página não encontrada.</h1>
-            <a class="btn btn-primary" href="/">Voltar para o início</a>
+            <h1 class="fw-bold">{{ __('messages.error404') }}</h1>
+            <a class="btn btn-primary" href="/">{{ __('messages.return.to.home.page') }}</a>
         </div>
     </div>
 @endsection

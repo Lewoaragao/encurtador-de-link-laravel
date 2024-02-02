@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            $table->string('alias')->nullable();
             $table->string('url');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('user_id');
+            $table->integer('num_clicks');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

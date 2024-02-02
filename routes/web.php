@@ -16,14 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 // LINK
-Route::get('/', [LinkController::class, 'index']);
-Route::post('/encurtar', [LinkController::class, 'store']);
-Route::get('/{slug}', [LinkController::class, 'redirect']);
-Route::get('/links/user', [LinkController::class, 'linksUser']);
+Route::get('/', [LinkController::class, 'index'])->name('view.index');
+Route::get('/{slug}', [LinkController::class, 'redirect'])->name('view.redirect');
+
+Route::prefix('link')->group(function () {
+    Route::get('/user', [LinkController::class, 'linksUser'])->name('view.link.user');
+    Route::post('/', [LinkController::class, 'store'])->name('link.store');
+    Route::get('/update/{id}', [LinkController::class, 'showUpdateForm'])->name('view.link.update');
+    Route::put('/update/{id}', [LinkController::class, 'update'])->name('link.update');
+    Route::delete('/{id}', [LinkController::class, 'destroy'])->name('link.destroy');
+});
 
 // AUTH
-Route::get('/auth/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::get('/auth/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/auth/register', [AuthController::class, 'register']);
-Route::get('/auth/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('view.auth.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('view.auth.register');
+    Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});

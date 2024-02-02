@@ -10,8 +10,10 @@ class Link extends Model
     use HasFactory;
 
     protected $fillable = [
+        'alias',
         'url',
         'slug',
+        'num_clicks',
         'user_id',
     ];
 
